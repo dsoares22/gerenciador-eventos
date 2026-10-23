@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eventos</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <h1>Eventos</h1>
+    <a href="event-form.html">Novo evento</a> |
+    <a href="categorias.html">Categorias</a>
+
+    <form id="filter-form">
+      <input type="text" id="filter-title" placeholder="Pesquisar por título" />
+
+      <select id="filter-category">
+        <option value="">Todas as categorias</option>
+      </select>
+
+      <label for="filter-start">De</label>
+      <input type="date" id="filter-start" />
+
+      <label for="filter-end">Até</label>
+      <input type="date" id="filter-end" />
+
+      <button type="submit">Filtrar</button>
+    </form>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Data</th>
+          <th>Horário</th>
+          <th>Local</th>
+          <th>Categoria</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="events"></tbody>
+    </table>
+
+    <script src="js/api.js"></script>
+    <script src="js/eventos.js"></script>
+  </body>
+</html>

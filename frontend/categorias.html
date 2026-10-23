@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Categorias</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <h1>Categorias</h1>
+    <a href="index.html">Voltar para eventos</a>
+
+    <form id="form">
+      <input type="hidden" id="id" />
+
+      <label for="name">Nome</label>
+      <input type="text" id="name" />
+
+      <label for="description">Descrição</label>
+      <input type="text" id="description" />
+
+      <button type="submit">Salvar</button>
+    </form>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Descrição</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="categories"></tbody>
+    </table>
+
+    <script src="js/api.js"></script>
+    <script src="js/categorias.js"></script>
+  </body>
+</html>

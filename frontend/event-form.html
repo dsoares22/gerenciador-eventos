@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Evento</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <h1 id="form-title">Novo evento</h1>
+    <a href="index.html">Voltar</a>
+
+    <form id="event-form">
+      <label for="title">Título</label>
+      <input type="text" id="title" />
+
+      <label for="description">Descrição</label>
+      <input type="text" id="description" />
+
+      <label for="date">Data</label>
+      <input type="date" id="date" />
+
+      <label for="time">Horário</label>
+      <input type="time" id="time" />
+
+      <label for="location">Local</label>
+      <input type="text" id="location" />
+
+      <label for="category">Categoria</label>
+      <select id="category">
+        <option value="">Selecione uma categoria</option>
+      </select>
+
+      <button type="submit">Salvar</button>
+    </form>
+
+    <script src="js/api.js"></script>
+    <script src="js/event-form.js"></script>
+  </body>
+</html>
