@@ -25,6 +25,7 @@ public class Category {
     @Column(length = 255)
     private String description;
 
+    // uma categoria pode ter vários eventos
     @OneToMany(mappedBy = "category")
     private List<Event> events = new ArrayList<>();
 

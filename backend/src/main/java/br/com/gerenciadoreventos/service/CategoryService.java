@@ -38,6 +38,7 @@ public class CategoryService {
     public CategoryResponse create(CategoryRequest request){
         String name = request.name().trim();
 
+        // não deixa cadastrar categoria com nome repetido
         if (categoryRepository.existsByNameIgnoreCase(name)){
             throw new ConflictException("Já existe uma categoria com esse nome");
         }
@@ -53,6 +54,7 @@ public class CategoryService {
         Category category = getCategory(id);
         String name = request.name().trim();
 
+        // verifica se outra categoria já usa esse nome
         if (categoryRepository.existsByNameIgnoreCaseAndIdNot(name, id)){
             throw new ConflictException("Já existe uma categoria com esse nome");
         }
@@ -66,6 +68,7 @@ public class CategoryService {
     public void delete(Long id){
         Category category = getCategory(id);
 
+        // não deixa excluir categoria que tem eventos
         if (eventRepository.existsByCategoryId(id)){
             throw new ConflictException("Não é possível excluir uma categoria que possui eventos associados");
         }

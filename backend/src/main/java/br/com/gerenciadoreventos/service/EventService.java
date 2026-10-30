@@ -24,6 +24,7 @@ public class EventService {
         this.categoryService = categoryService;
     }
 
+    // filtra por título, categoria ou período (um de cada vez)
     public List<EventResponse> findAll(String title, Long categoryId, LocalDate startDate, LocalDate endDate){
         if (title != null && !title.isBlank()){
             return toResponseList(eventRepository.findByTitleContainingIgnoreCase(title.trim()));
@@ -78,6 +79,7 @@ public class EventService {
                 .orElseThrow(() -> new ResourceNotFoundException("Evento não encontrado"));
     }
 
+    // não deixa cadastrar evento no passado
     private void validateDateTime(EventRequest request){
         LocalDateTime eventDateTime = LocalDateTime.of(request.date(), request.time());
 
