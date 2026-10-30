@@ -11,8 +11,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     boolean existsByCategoryId(Long categoryId);
 
     List<Event> findByTitleContainingIgnoreCase(String title);
-
     List<Event> findByCategoryId(Long categoryId);
-
     List<Event> findByDateBetween(LocalDate startDate, LocalDate endDate);
 }

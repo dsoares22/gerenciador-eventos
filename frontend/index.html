@@ -2,29 +2,44 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Eventos</title>
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <h1>Eventos</h1>
-    <a href="event-form.html">Novo evento</a> |
-    <a href="categorias.html">Categorias</a>
+    <a href="categorias.html">Ir para categorias</a>
 
-    <form id="filter-form">
-      <input type="text" id="filter-title" placeholder="Pesquisar por título" />
+    <h2>Cadastro</h2>
+    <form id="form">
+      <input type="hidden" id="id" />
+      <label>Título <input type="text" id="title" /></label>
+      <label>Descrição <input type="text" id="description" /></label>
+      <label>Data <input type="date" id="date" /></label>
+      <label>Horário <input type="time" id="time" /></label>
+      <label>Local <input type="text" id="location" /></label>
+      <label
+        >Categoria
+        <select id="category">
+          <option value="">Selecione</option>
+        </select>
+      </label>
+      <button type="submit">Salvar</button>
+      <button type="reset">Limpar</button>
+    </form>
 
-      <select id="filter-category">
-        <option value="">Todas as categorias</option>
-      </select>
-
-      <label for="filter-start">De</label>
-      <input type="date" id="filter-start" />
-
-      <label for="filter-end">Até</label>
-      <input type="date" id="filter-end" />
-
+    <h2>Filtros</h2>
+    <form id="filters">
+      <label>Título <input type="text" id="filter-title" /></label>
+      <label
+        >Categoria
+        <select id="filter-category">
+          <option value="">Todas</option>
+        </select>
+      </label>
+      <label>De <input type="date" id="filter-start" /></label>
+      <label>Até <input type="date" id="filter-end" /></label>
       <button type="submit">Filtrar</button>
+      <button type="reset">Limpar filtros</button>
     </form>
 
     <table>

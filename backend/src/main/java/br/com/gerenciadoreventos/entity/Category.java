@@ -5,8 +5,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "category")
@@ -16,15 +19,15 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "O nome da categoria é obrigatório")
     @Column(nullable = false, length = 100)
     private String name;
 
     @Column(length = 255)
     private String description;
 
-    public Category(){
-    }
+    @OneToMany(mappedBy = "category")
+    private List<Event> events = new ArrayList<>();
+
     public Long getId(){
         return id;
     }
@@ -42,5 +45,8 @@ public class Category {
     }
     public void setDescription(String description){
         this.description = description;
+    }
+    public List<Event> getEvents(){
+        return events;
     }
 }

@@ -4,9 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -18,22 +17,15 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "O título é obrigatório")
     private String title;
-
     private String description;
-
-    @NotNull(message = "A data é obrigatória")
     private LocalDate date;
-
-    @NotNull(message = "O horário é obrigatório")
     private LocalTime time;
-
-    @NotBlank(message = "O local é obrigatório")
     private String location;
 
-    @NotNull(message = "A categoria é obrigatória")
+    // vários eventos pertencem a uma categoria
     @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 
     public Long getId(){
