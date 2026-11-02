@@ -3,13 +3,19 @@ body {
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
-  color: #333;
+  color: #eee;
+  background-color: #121212;
+}
+
+a {
+  color: #4da3ff;
 }
 
 form {
   padding: 15px;
-  border: 1px solid #ddd;
+  border: 1px solid #444;
   border-radius: 4px;
+  background-color: #1e1e1e;
 }
 
 label {
@@ -23,11 +29,28 @@ select {
   width: 250px;
   margin-top: 4px;
   padding: 5px;
+  color: #eee;
+  background-color: #2a2a2a;
+  border: 1px solid #555;
+  border-radius: 4px;
+}
+
+input[type="date"],
+input[type="time"] {
+  color-scheme: dark;
 }
 
 button {
   padding: 5px 12px;
   cursor: pointer;
+  color: #eee;
+  background-color: #333;
+  border: 1px solid #555;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #444;
 }
 
 /* filtros na mesma linha */
@@ -55,11 +78,11 @@ table {
 
 th,
 td {
-  border: 1px solid #ccc;
+  border: 1px solid #444;
   padding: 8px;
   text-align: left;
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: #2a2a2a;
 }
