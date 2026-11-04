@@ -237,4 +237,3 @@ Além disso, os campos obrigatórios e o tamanho máximo dos textos são validad
 - 👤 Autor: Davi Silva Soares
 - 📚 Disciplina: Programação Backend
 - 👨‍🏫 Professor: Anderson Soares
-- 🎓 Projeto desenvolvido para fins acadêmicos
