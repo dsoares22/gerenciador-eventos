@@ -67,7 +67,7 @@ O projeto roda com um único comando, usando Docker. Ele sobe o banco de dados, 
 
 ### Requisitos
 
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) instalado e aberto
+- [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/) instalado e aberto
 
 Não é preciso instalar Java, PostgreSQL nem Maven.
 
