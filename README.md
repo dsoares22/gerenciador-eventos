@@ -27,6 +27,7 @@ API REST em Java com Spring Boot para cadastrar eventos e organizá-los por cate
 | Swagger (springdoc-openapi) | Documentação da API |
 | Maven | Dependências e build |
 | HTML, CSS e JavaScript | Telas do frontend |
+| Docker | Execução do projeto com um comando |
 
 ## 🧩 Como a API funciona
 
@@ -38,7 +39,7 @@ API REST em Java com Spring Boot para cadastrar eventos e organizá-los por cate
 
 ## 🗄️ Banco de dados
 
-São duas tabelas: `category` e `event`. Cada evento guarda o id da sua categoria (`category_id`).
+São duas tabelas: `category` e `event`. Cada evento guarda o id da sua categoria (`category_id`). O script abaixo está no arquivo `database/init.sql` e é executado automaticamente pelo Docker.
 
 ```sql
 CREATE TABLE category (
@@ -60,16 +61,15 @@ CREATE TABLE event (
 );
 ```
 
-## 🚀 Como executar
+## 🚀 Como executar (com Docker)
+
+O projeto roda com um único comando, usando Docker. Ele sobe o banco de dados, o backend e o frontend juntos.
 
 ### Requisitos
 
-- Java 25 (JDK)
-- PostgreSQL e pgAdmin
-- IntelliJ IDEA (opcional, para o backend)
-- VS Code com a extensão Live Server (para o frontend)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) instalado e aberto
 
-O Maven não precisa estar instalado, porque o projeto usa o Maven Wrapper (`mvnw`).
+Não é preciso instalar Java, PostgreSQL nem Maven.
 
 ### 1. Clonar o projeto
 
@@ -78,81 +78,46 @@ git clone https://github.com/dsoares22/gerenciador-eventos.git
 cd gerenciador-eventos
 ```
 
-### 2. Criar o banco de dados
-
-1. Abra o pgAdmin e conecte ao servidor PostgreSQL.
-2. Clique com o botão direito em Databases → Create → Database, informe o nome `gerenciador_eventos` e salve.
-3. Selecione o banco criado, abra Tools → Query Tool, cole o script da seção Banco de dados (acima) e clique em Execute (F5).
-4. Confira em Schemas → public → Tables se as tabelas `category` e `event` foram criadas.
-
-### 3. Configurar a conexão com o banco
-
-A conexão já aponta para `jdbc:postgresql://localhost:5432/gerenciador_eventos`. Falta informar o usuário e a senha:
-
-1. Na pasta `backend/src/main/resources/`, faça uma cópia do arquivo `application-local.properties.example` com o nome `application-local.properties`.
-2. Preencha com o usuário e a senha do seu PostgreSQL:
-
-   ```properties
-   spring.datasource.username=postgres
-   spring.datasource.password=sua_senha
-   ```
-
-3. Se o seu PostgreSQL usar outra porta, adicione também a URL nesse arquivo:
-
-   ```properties
-   spring.datasource.url=jdbc:postgresql://localhost:PORTA/gerenciador_eventos
-   ```
-
-O arquivo `application-local.properties` está no `.gitignore`, para que as credenciais não sejam enviadas ao repositório.
-
-### 4. Executar o backend
-
-**Pelo IntelliJ IDEA:**
-
-1. Abra a pasta `backend` em **File → Open** e aguarde o download das dependências.
-2. Execute a classe `GerenciadorEventosApplication`, em `src/main/java/br/com/gerenciadoreventos/`.
-
-**Pelo terminal:**
+### 2. Subir a aplicação
 
 ```bash
-cd backend
-./mvnw spring-boot:run        # macOS / Linux
-mvnw.cmd spring-boot:run      # Windows
+docker compose up --build
 ```
 
-A aplicação terminou de iniciar quando aparecer no console a mensagem `Started GerenciadorEventosApplication`. A API fica disponível em `http://localhost:8080`.
+A primeira execução demora alguns minutos, porque baixa as imagens e compila o backend. A aplicação está pronta quando aparecer no terminal a mensagem `Started GerenciadorEventosApplication`.
 
-Se aparecer um erro de autenticação no banco, confira o usuário e a senha do passo 3. Se aparecer `Schema-validation`, confira se o script SQL foi executado.
+O banco já é criado com as tabelas pelo arquivo `database/init.sql`.
 
-### 5. Testar a API pelo Swagger
+### 3. Acessar
 
-Com o backend rodando, acesse **http://localhost:8080/swagger-ui.html**.
+| O que | Endereço |
+|---|---|
+| Frontend | http://localhost:5500 |
+| Swagger | http://localhost:8080/swagger-ui.html |
+| API | http://localhost:8080/api |
+| PostgreSQL | `localhost:5433` (usuário `postgres`, senha `postgres`) |
 
-1. Clique no endpoint que quer testar.
-2. Clique em Try it out.
-3. Preencha os parâmetros ou o JSON (o Swagger já mostra um exemplo).
-4. Clique em Execute. O status e a resposta aparecem logo abaixo.
+As portas 8080, 5500 e 5433 precisam estar livres.
 
-### 6. Executar o frontend
+### 4. Parar
 
-O backend precisa estar rodando.
-
-Pelo VS Code:
-
-1. Abra a pasta `frontend` no VS Code.
-2. Instale a extensão Live Server, se ainda não tiver.
-3. Clique com o botão direito em `index.html` → Open with Live Server.
-
-Ou pelo terminal (com Python instalado):
+Aperte `Ctrl + C` no terminal ou rode:
 
 ```bash
-cd frontend
-python3 -m http.server 5500
+docker compose down
 ```
 
-Depois acesse http://localhost:5500.
+Os dados ficam salvos para a próxima execução. Para apagar também os dados do banco, use `docker compose down -v`.
 
-São duas telas:
+### Testar a API pelo Swagger
+
+1. Acesse http://localhost:8080/swagger-ui.html.
+2. Clique no endpoint que quer testar.
+3. Clique em Try it out.
+4. Preencha os parâmetros ou o JSON (o Swagger já mostra um exemplo).
+5. Clique em Execute. O status e a resposta aparecem logo abaixo.
+
+### Telas do frontend
 
 - Eventos (`index.html`): cadastrar, editar, excluir e filtrar eventos.
 - Categorias (`categorias.html`): cadastrar, editar e excluir categorias.
